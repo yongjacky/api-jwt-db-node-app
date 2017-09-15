@@ -1,10 +1,25 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import template from './template';
+//import sessionsController from './controllers/sessions'
 
 const app = express();
 const api = express.Router();
 
-app.use(bodyParser.json);
+function renderClient(req, res) {
+    res.send(template);
+}
+
+app.use(renderClient);
+app.use(bodyParser.json());
 app.use('/api',api);
 
-app.listen(9999);
+api.get('/health', (req,res)=> {
+    res.json({status: 'OK'})
+});
+
+//sessionsController(api);
+
+app.listen(1234);
+
+console.log('started!');

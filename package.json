@@ -2,7 +2,6 @@
   "name": "api-jwt-db-node-app",
   "version": "0.1.0",
   "description": "API JWT Db Node Application",
-  "main": "index.js",
   "scripts": {
     "dev": "nodemon src/server.js --exec babel-node",
     "build": "babel src -d build --presets es2015,stage-2",
