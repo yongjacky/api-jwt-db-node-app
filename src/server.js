@@ -1,25 +1,24 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import template from './template';
-//import sessionsController from './controllers/sessions'
+import sessionsController from './controllers/sessions'
+import customersController from './controllers/customers';
+require('dotenv').config();
 
 const app = express();
+const homeRoute = express.Router();
 const api = express.Router();
 
-function renderClient(req, res) {
-    res.send(template);
-}
-
-app.use(renderClient);
 app.use(bodyParser.json());
 app.use('/api',api);
 
-api.get('/health', (req,res)=> {
-    res.json({status: 'OK'})
+app.use('/',homeRoute);
+homeRoute.get('/', (req,res)=> {
+    res.status(200).json({});
 });
 
-//sessionsController(api);
+sessionsController(api);
+customersController(api);
 
-app.listen(1234);
-
-console.log('started!');
+app.listen(process.env.APP_LISTEN_PORT, () => {
+    console.log(`API JWT DB NODE APP Started and Listened at port ${process.env.APP_LISTEN_PORT}`);
+});

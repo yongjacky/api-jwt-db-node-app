@@ -1,15 +1,17 @@
 // Update with your config settings.
+require('dotenv').config();
 
 module.exports = {
-  client: 'postgresql',
+  client: process.env.DB_CLIENT,
   connection: {
-    database: 'api_jwt_db_node_app',
-    user:     'postgres',
-    password: 'password'
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    user:     process.env.DB_USER,
+    password: process.env.DB_PWD
   },
   pool: {
-    min: 2,
-    max: 10
+    min: process.env.DB_CONN_POOL_MIN,
+    max: process.env.DB_CONN_POOL_MAX
   },
   migrations: {
     tableName: 'knex_migrations'
